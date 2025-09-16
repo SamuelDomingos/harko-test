@@ -13,10 +13,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Filter } from 'lucide-react';
 import { useUrlParams } from '@/hooks/useUrlParams';
-
-interface FilterDropdownProps {
-  defaultValue?: string;
-}
+import { FilterDropdownProps } from '@/types/order';
 
 export default function FilterDropdown({ defaultValue = '' }: FilterDropdownProps) {
   const { setFilter } = useUrlParams();

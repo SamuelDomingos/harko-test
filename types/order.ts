@@ -9,6 +9,15 @@ export interface Order {
   updated_at: string;
 }
 
+export interface PageProps {
+  searchParams: {
+    page?: string;
+    search?: string;
+    status?: string;
+    sort?: string;
+  };
+}
+
 export interface ApiResponse {
   data: Order[];
   links: {
@@ -23,4 +32,24 @@ export interface ApiResponse {
     per_page: number;
     total: number;
   };
+}
+
+export interface FilterDropdownProps {
+  defaultValue?: string;
+}
+
+export interface SearchInputProps {
+  defaultValue?: string;
+}
+
+export interface OrdersTableProps {
+  orders: Order[];
+  currentSort?: string;
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
 }

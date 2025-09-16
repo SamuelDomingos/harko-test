@@ -5,10 +5,7 @@ import { Input } from '@/components/ui/input';
 import { useState, useEffect } from 'react';
 import { useUrlParams } from '@/hooks/useUrlParams';
 import { useDebounce } from '@/hooks/useDebounce';
-
-interface SearchInputProps {
-  defaultValue?: string;
-}
+import { SearchInputProps } from '@/types/order';
 
 export default function SearchInput({ defaultValue = '' }: SearchInputProps) {
   const [searchTerm, setSearchTerm] = useState(defaultValue);

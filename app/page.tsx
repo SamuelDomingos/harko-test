@@ -11,15 +11,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { ModeToggle } from '@/components/ModeToggle';
-
-interface PageProps {
-  searchParams: {
-    page?: string;
-    search?: string;
-    status?: string;
-    sort?: string;
-  };
-}
+import { PageProps } from '@/types/order';
 
 export default function Component({ searchParams }: PageProps) {
   return (

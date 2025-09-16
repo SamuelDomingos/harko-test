@@ -10,13 +10,7 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 import { useUrlParams } from '@/hooks/useUrlParams';
-
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  hasNext: boolean;
-  hasPrev: boolean;
-}
+import { PaginationProps } from '@/types/order';
 
 export default function Pagination({ currentPage, totalPages, hasNext, hasPrev }: PaginationProps) {
   const { setPage } = useUrlParams();

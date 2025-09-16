@@ -10,14 +10,9 @@ import {
 } from '@/components/ui/table';
 import { Badge } from './ui/badge';
 import { ChevronsUpDown, ChevronUp, ChevronDown } from 'lucide-react';
-import { Order } from '@/types/order';
+import { OrdersTableProps } from '@/types/order';
 import { useUrlParams } from '@/hooks/useUrlParams';
 import { formatCurrency, formatDate, formatStatus } from '@/lib/utils';
-
-interface OrdersTableProps {
-  orders: Order[];
-  currentSort?: string;
-}
 
 export default function OrdersTable({ orders, currentSort }: OrdersTableProps) {
   const { setSort } = useUrlParams();

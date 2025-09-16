@@ -6,7 +6,7 @@ interface GetOrdersParams {
   page?: number;
   search?: string;
   status?: string;
-  sort?: string; // já no formato 'order_date' ou '-order_date'
+  sort?: string;
 }
 
 export async function getOrders({

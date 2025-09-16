@@ -3,17 +3,9 @@ import { getOrders } from '@/lib/api';
 import { ApiResponse } from '@/types/order';
 import OrdersTable from '@/components/orders-table';
 import Pagination from '@/components/pagination';
+import { PageProps } from '@/types/order';
 
-interface OrdersContentProps {
-  searchParams: {
-    page?: string;
-    search?: string;
-    status?: string;
-    sort?: string;
-  };
-}
-
-export default async function OrdersContent({ searchParams }: OrdersContentProps) {
+export default async function OrdersContent({ searchParams }: PageProps) {
   try {
     const ordersData: ApiResponse = await getOrders({
       page: Number(searchParams.page) || 1,
