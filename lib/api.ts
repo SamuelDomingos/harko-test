@@ -6,24 +6,20 @@ interface GetOrdersParams {
   page?: number;
   search?: string;
   status?: string;
-  sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
+  sort?: string; // já no formato 'order_date' ou '-order_date'
 }
 
 export async function getOrders({
   page = 1,
   search = '',
   status = '',
-  sortBy = 'order_date',
-  sortOrder = 'desc'
+  sort = 'order_date'
 }: GetOrdersParams = {}): Promise<ApiResponse> {
   const params = new URLSearchParams({
     page: page.toString(),
     ...(search && { search }),
     ...(status && { status }),
-    ...(sortBy && { 
-      sort: sortOrder === 'desc' ? `-${sortBy}` : sortBy 
-    })
+    ...(sort && { sort })
   });
 
   const response = await fetch(`${API_BASE}/orders?${params}`, {

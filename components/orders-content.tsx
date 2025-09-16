@@ -19,8 +19,7 @@ export default async function OrdersContent({ searchParams }: OrdersContentProps
       page: Number(searchParams.page) || 1,
       search: searchParams.search || '',
       status: searchParams.status || '',
-      sortBy: searchParams.sort?.replace(/^-/, '') || 'order_date',
-      sortOrder: searchParams.sort?.startsWith('-') ? 'desc' : 'asc'
+      sort: searchParams.sort || 'order_date'
     });
 
     return (
