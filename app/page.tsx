@@ -1,7 +1,7 @@
+import { Suspense } from 'react';
 import FilterDropdown from '@/components/filter-dropdown';
-import OrdersTable from '@/components/orders-table';
-import Pagination from '@/components/pagination';
 import SearchInput from '@/components/search-input';
+import OrdersContent from '@/components/orders-content';
 
 import {
   Card,
@@ -10,10 +10,23 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { ModeToggle } from '@/components/ModeToggle';
 
-export default async function Component() {
+interface PageProps {
+  searchParams: {
+    page?: string;
+    search?: string;
+    status?: string;
+    sort?: string;
+  };
+}
+
+export default function Component({ searchParams }: PageProps) {
   return (
     <main className="container px-1 py-10 md:p-10">
+        <div className="flex justify-end mb-4">
+          <ModeToggle />
+        </div>
       <Card>
         <CardHeader className="px-7">
           <CardTitle>Pedidos</CardTitle>
@@ -21,15 +34,14 @@ export default async function Component() {
             Uma listagem de pedidos do seu negócio.
           </CardDescription>
           <div className="flex pt-10 gap-4">
-            <SearchInput />
-            <FilterDropdown />
+            <SearchInput defaultValue={searchParams.search} />
+            <FilterDropdown defaultValue={searchParams.status} />
           </div>
         </CardHeader>
         <CardContent>
-          <OrdersTable />
-          <div className="mt-8">
-            <Pagination />
-          </div>
+          <Suspense fallback={<div className="p-4 text-center">Carregando pedidos...</div>}>
+            <OrdersContent searchParams={searchParams} />
+          </Suspense>
         </CardContent>
       </Card>
     </main>
