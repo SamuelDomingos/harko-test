@@ -18,7 +18,7 @@ A API que será utilizada foi desenvolvida por nós, do Codante. O endpoint prin
 
 A documentação da API está em <a target="_blank" href="https://apis-docs.codante.io/orders-api">https://apis-docs.codante.io/orders-api</a>. Será necessário consultá-la para fazer este Mini Projeto.
 
-> [!NOTE]    
+> [!NOTE]
 > Nenhum dos dados da API são reais e a base de dados é redefinida a cada hora.
 
 ## 🔨 Requisitos
@@ -33,8 +33,8 @@ A documentação da API está em <a target="_blank" href="https://apis-docs.coda
   - Data do Pedido
   - Valor do Pedido
 
-> [!TIP]  
-> O valor do pedido está em centavos. Faça as conversões e transforme para o formato brasileiro de número.  
+> [!TIP]
+> O valor do pedido está em centavos. Faça as conversões e transforme para o formato brasileiro de número.
 
 **Busca Textual**
 
@@ -83,11 +83,163 @@ Neste mini projeto não será preciso implementar nenhum design - já fizemos is
 - Search Params
 - Estado na URL
 - Server Components no Next.js
-- 'use client' 
-- Paginação e Ordenação. 
+- 'use client'
+- Paginação e Ordenação.
 
 ### Pré-requisitos
 
 - React
 - Next.js básico
 - Entender as diferenças entre server e client components é recomendável
+
+---
+
+# Documentação do endpoint: /orders-api/orders
+
+## Listagem de pedidos
+
+Este endpoint permite que você recupere uma lista paginada de todos os seus pedidos. Por padrão, um máximo de dez pedidos são mostrados por página.
+
+## Atributos opcionais (query params)
+
+- **page**
+
+  - **Tipo**: integer
+  - **Descrição**: Número da página a ser recuperada.
+
+- **status**
+
+  - **Tipo**: string
+  - **Descrição**: Filtra os pedidos por status. Pode ser `completed` ou `pending`.
+
+- **sort**
+
+  - **Tipo**: string
+  - **Descrição**: Ordena os pedidos por um campo específico. Pode ser `customer_name`, `order_date`, `amount_in_cents`, `status`, `created_at` ou `updated_at`. O padrão é `order_date`.
+  - Para ordenação decrescente, adicione um sinal de menos (`-`) antes do nome do campo.
+
+- **search**
+  - **Tipo**: string
+  - **Descrição**: Filtra os pedidos por um termo de busca textual (nome do cliente).
+
+## Exemplo de resposta
+
+```json
+{
+  "data": [
+    {
+      "id": 178,
+      "customer_name": "Michelle Carrara",
+      "customer_email": "michelle.carrara@example.com",
+      "order_date": "2014-05-05",
+      "amount_in_cents": 2739,
+      "status": "pending",
+      "created_at": "2024-04-29T18:00:02.000000Z",
+      "updated_at": "2024-04-29T18:00:02.000000Z"
+    },
+    // ...
+    {
+      "id": 87,
+      "customer_name": "Stephanie Dias",
+      "customer_email": "stephanie.dias@example.net",
+      "order_date": "2014-09-07",
+      "amount_in_cents": 965,
+      "status": "completed",
+      "created_at": "2024-04-29T18:00:02.000000Z",
+      "updated_at": "2024-04-29T18:00:02.000000Z"
+    }
+  ],
+  "links": {
+    "first": "https://apis.codante.io/api/orders-api/orders?page=1",
+    "last": "https://apis.codante.io/api/orders-api/orders?page=30",
+    "prev": null,
+    "next": "https://apis.codante.io/api/orders-api/orders?page=2"
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 30,
+    "links": [
+      {
+        "url": null,
+        "label": "&laquo; Previous",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=1",
+        "label": "1",
+        "active": true
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=2",
+        "label": "2",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=3",
+        "label": "3",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=4",
+        "label": "4",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=5",
+        "label": "5",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=6",
+        "label": "6",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=7",
+        "label": "7",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=8",
+        "label": "8",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=9",
+        "label": "9",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=10",
+        "label": "10",
+        "active": false
+      },
+      {
+        "url": null,
+        "label": "...",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=29",
+        "label": "29",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=30",
+        "label": "30",
+        "active": false
+      },
+      {
+        "url": "https://apis.codante.io/api/orders-api/orders?page=2",
+        "label": "Next &raquo;",
+        "active": false
+      }
+    ],
+    "path": "https://apis.codante.io/api/orders-api/orders",
+    "per_page": 10,
+    "to": 10,
+    "total": 300
+  }
+}
+```
